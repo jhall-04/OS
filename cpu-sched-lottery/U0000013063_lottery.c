@@ -45,9 +45,19 @@ main(int argc, char *argv[])
 
     // populate list with some number of jobs, each
     // with some number of tickets
-    insert(50);
+    insert(20);
+    insert(40);
+    insert(60);
+    insert(80);
     insert(100);
-    insert(25);
+    insert(140);
+    int wins[141];
+    wins[20] = 0;
+    wins[40] = 0;
+    wins[60] = 0;
+    wins[80] = 0;
+    wins[100] = 0;
+    wins[140] = 0;
 
     print_list();
     
@@ -60,15 +70,17 @@ main(int argc, char *argv[])
 	// loop until the sum of ticket values is > the winner
 	while (current) {
 	    counter = counter + current->tickets;
-	    if (counter > winner)
+	    if (counter > winner) {
+        wins[current->tickets] += 1;
 		break; // found the winner
+        }
 	    current = current->next;
 	}
 	// current is the winner: schedule it...
 	print_list();
 	printf("winner: %d %d\n\n", winner, current->tickets);
-
-    }
+}
+    printf("\n20: %d, 40: %d, 60: %d, 80: %d, 100: %d, 140: %d\n", wins[20], wins[40], wins[60], wins[80], wins[100], wins[140]);
     return 0;
 }
 
