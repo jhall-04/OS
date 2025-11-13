@@ -25,7 +25,7 @@ void multiplyMatrices(MatrixArgs *args) {
             C[i][j] += *A[i][k] * *B[k][j];
         }
     }
-    return C;
+    return (void *) C;
 }
 
 // Function to print a 3x3 matrix
@@ -76,9 +76,9 @@ int main() {
     Pthread_create(&row1, NULL, multiplyMatrices, &args[0]);
     Pthread_create(&row2, NULL, multiplyMatrices, &args[1]);
     Pthread_create(&row3, NULL, multiplyMatrices, &args[2]);
-    Pthread_join(row1, &C);
-    Pthread_join(row2, &C);
-    Pthread_join(row3, &C);
+    Pthread_join(row1, (void **) &C);
+    Pthread_join(row2, (void **) &C);
+    Pthread_join(row3, (void **) &C);
 
     // Display the result
     printf("Result of matrix multiplication:\n");
