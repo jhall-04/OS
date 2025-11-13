@@ -22,7 +22,7 @@ void *mythread(void *arg) {
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        printf("Usage: <nth fibbonacci>\n");
+        printf("Usage: <nth Fibonacci>\n");
         return -1;
     }
     int n = atoi(argv[1]);
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
     pthread_t p;
     Pthread_create(&p, NULL, mythread, &n);
     Pthread_join(p, (void **) &fib);
-    printf("Fibbonacci N: %d\n", fib[n-1]);
+    printf("Fibonacci N: %d\n", fib[n-1]);
     free(fib);
     return 0;
 }
