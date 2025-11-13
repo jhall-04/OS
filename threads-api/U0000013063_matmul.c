@@ -17,7 +17,11 @@ void *multiplyMatrices(void *arg) {
     int (*A)[SIZE][SIZE] = args->A;
     int (*B)[SIZE][SIZE] = args->B;
     int row = args->row;
-    int *C[SIZE][SIZE];
+    int **C = malloc(SIZE * sizeof(int *));  // Result matrix
+    int l;
+    for (l = 0; l < SIZE; l++) {
+        C[l] = malloc(SIZE * sizeof(int));
+    }
     int i, k, j;
     i = row;
     for (j = 0; j < SIZE; j++) {
@@ -45,7 +49,10 @@ int main() {
 
     int A[SIZE][SIZE];  // Matrix A
     int B[SIZE][SIZE];  // Matrix B
-    int *C[SIZE][SIZE];  // Result matrix
+    int **C = malloc(SIZE * sizeof(int *));  // Result matrix
+    for (i = 0; i < SIZE; i++) {
+        C[i] = malloc(SIZE * sizeof(int));
+    }
 
     // Read matrix A from the user
     printf("Enter the elements of matrix A (3x3):\n");
