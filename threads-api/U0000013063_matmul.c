@@ -12,7 +12,8 @@ typedef struct {
 } MatrixArgs;
 
 // Function to multiply two 3x3 matrices A and B, storing the result in matrix C
-void multiplyMatrices(MatrixArgs *args) {
+void *multiplyMatrices(void *arg) {
+    MatrixArgs *args = (MatrixArgs *) arg;
     int (*A)[SIZE][SIZE] = args->A;
     int (*B)[SIZE][SIZE] = args->B;
     int row = args->row;
