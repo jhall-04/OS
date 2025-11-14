@@ -8,6 +8,7 @@
 typedef struct {
     int (*A)[SIZE][SIZE];
     int (*B)[SIZE][SIZE];
+    int (*C)[SIZE][SIZE];
     int row;
 } MatrixArgs;
 
@@ -16,21 +17,17 @@ void *multiplyMatrices(void *arg) {
     MatrixArgs *args = (MatrixArgs *) arg;
     int (*A)[SIZE][SIZE] = args->A;
     int (*B)[SIZE][SIZE] = args->B;
+    int (*C)[SIZE][SIZE] = args->C;
     int row = args->row;
-    int **C = malloc(SIZE * sizeof(int *));  // Result matrix
-    int l;
-    for (l = 0; l < SIZE; l++) {
-        C[l] = malloc(SIZE * sizeof(int));
-    }
     int i, k, j;
     i = row;
     for (j = 0; j < SIZE; j++) {
-        C[i][j] = 0;
+        (*C)[i][j] = 0;
         for (k = 0; k < SIZE; k++) {
-            C[i][j] += *A[i][k] * *B[k][j];
+            (*C)[i][j] += (*A)[i][k] * (*B)[k][j];
         }
     }
-    return (void *) C;
+    return NULL;
 }
 
 // Function to print a 3x3 matrix
@@ -49,10 +46,7 @@ int main() {
 
     int A[SIZE][SIZE];  // Matrix A
     int B[SIZE][SIZE];  // Matrix B
-    int **C = malloc(SIZE * sizeof(int *));  // Result matrix
-    for (i = 0; i < SIZE; i++) {
-        C[i] = malloc(SIZE * sizeof(int));
-    }
+    int C[SIZE][SIZE];  // Resultant Matrix C
 
     // Read matrix A from the user
     printf("Enter the elements of matrix A (3x3):\n");
@@ -76,6 +70,7 @@ int main() {
     for (i = 0; i < SIZE; i++) {
         args[i].A = &A;
         args[i].B = &B;
+        args[i].C = &C;
         args[i].row = i;
     }
 
