@@ -31,11 +31,11 @@ void *multiplyMatrices(void *arg) {
 }
 
 // Function to print a 3x3 matrix
-void printMatrix(int **matrix) {
+void printMatrix(int (*matrix)[SIZE][SIZE]) {
 int i, j;
     for (i = 0; i < SIZE; i++) {
         for (j = 0; j < SIZE; j++) {
-            printf("%d ", matrix[i][j]);
+            printf("%d ", (*matrix)[i][j]);
         }
         printf("\n");
     }
