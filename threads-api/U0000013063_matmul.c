@@ -79,14 +79,13 @@ int main() {
     Pthread_create(&row1, NULL, multiplyMatrices, &args[0]);
     Pthread_create(&row2, NULL, multiplyMatrices, &args[1]);
     Pthread_create(&row3, NULL, multiplyMatrices, &args[2]);
-    Pthread_join(row1, (void **) &C);
-    Pthread_join(row2, (void **) &C);
-    Pthread_join(row3, (void **) &C);
+    Pthread_join(row1, NULL);
+    Pthread_join(row2, NULL);
+    Pthread_join(row3, NULL);
 
     // Display the result
     printf("Result of matrix multiplication:\n");
-    printMatrix(C);
-
+    printMatrix(&C);
     return 0;
 }
 
